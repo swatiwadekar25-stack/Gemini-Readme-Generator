@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>ReadmeAI | README Generator</title>
+  <meta
+    name="description"
+    content="Generate professional project README files with AI."
+  >
+
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Markdown rendering and sanitization -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.6/dist/purify.min.js"></script>
+
+</head>
+
+<body>
+  <header class="navbar">
+    <a href="/" class="brand">
+      <span class="brand-icon">R</span>
+      <span>Readme<span class="brand-highlight">AI</span></span>
+    </a>
+
+    <span class="nav-label">AI README GENERATOR</span>
+    <span>
+<a href="history.html" class="history-link">
+    <span aria-hidden="true">◷</span>
+    History
+</a>
+</span>
+    <span><button
+          type="button"
+          id="themeToggle"
+          class="theme-toggle"
+          aria-label="Switch to light mode"
+          aria-pressed="false"
+          title="Switch theme">
+  <span id="themeIcon" aria-hidden="true">☀</span>
+</button>
+</span>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="eyebrow">
+        <span class="status-dot"></span>
+        YOUR AI DOCUMENTATION ASSISTANT
+      </div>
+
+      <h1>Great projects deserve<br>
+        <span>great documentation.</span>
+      </h1>
+
+      <p class="hero-description">
+        Turn your project details into a clean, professional README.
+        Just describe your project and let AI do the writing.
+      </p>
+    </section>
+
+    <section class="workspace">
+      <div class="panel form-panel">
+        <div class="panel-heading">
+          <div>
+            <span class="step-label">STEP 01</span>
+            <h2>Project details</h2>
+            <p>Tell us a little about what you built.</p>
+          </div>
+          <span class="heading-icon">✎</span>
+        </div>
+
+        <form id="readmeForm">
+          <div class="field">
+            <label for="projectName">Project name <span>*</span></label>
+            <input
+              type="text"
+              id="projectName"
+              name="projectName"
+              placeholder="e.g. Student Feedback Manager"
+              maxlength="150"
+              required
+            >
+          </div>
+
+          <div class="field">
+            <label for="description">Project description <span>*</span></label>
+            <textarea
+              id="description"
+              name="description"
+              placeholder="What does your project do? What problem does it solve?"
+              rows="4"
+              maxlength="3000"
+              required
+            ></textarea>
+          </div>
+
+          <div class="field">
+            <label for="technologies">Technologies used <span>*</span></label>
+            <input
+              type="text"
+              id="technologies"
+              name="technologies"
+              placeholder="e.g. HTML, CSS, JavaScript, Node.js"
+              maxlength="1000"
+              required
+            >
+          </div>
+
+          <div class="field">
+            <label for="features">Key features <span>*</span></label>
+            <textarea
+              id="features"
+              name="features"
+              placeholder="e.g. Add notes, edit notes, delete notes, search notes"
+              rows="4"
+              maxlength="3000"
+              required
+            ></textarea>
+            <small>Separate features with commas or new lines.</small>
+          </div>
+
+          <button type="submit" id="generateBtn" class="primary-btn">
+            <span id="buttonText">✦ Generate README</span>
+          </button>
+
+          <p class="form-note">
+            ✨ Generated using Gemini AI
+          </p>
+        </form>
+      </div>
+
+      <div class="panel preview-panel">
+        <div class="panel-heading preview-heading">
+          <div>
+            <span class="step-label">STEP 02</span>
+            <h2>Your README</h2>
+            <p>Preview your documentation before downloading.</p>
+          </div>
+          <span class="file-badge">MD</span>
+        </div>
+
+        <div class="preview-toolbar">
+          <span class="file-name">📄 README.md</span>
+
+          <div class="toolbar-actions">
+            <button
+              type="button"
+              id="copyBtn"
+              class="secondary-btn"
+              disabled
+            >Copy</button>
+
+            <button
+              type="button"
+              id="downloadBtn"
+              class="secondary-btn download-btn"
+              disabled
+            >↓ Download</button>
+          </div>
+        </div>
+
+        <div
+          id="preview"
+          class="markdown-preview empty-preview"
+          aria-live="polite"
+        >
+          <div class="empty-state">
+            <div class="empty-icon">✧</div>
+            <h3>Your README starts here</h3>
+            <p>Fill in your project details and click Generate README.</p>
+          </div>
+        </div>
+
+        <div class="preview-footer">
+          <span id="previewStatus">Waiting for project details</span>
+          <span id="wordCount">0 words</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="tip-card">
+      <span class="tip-icon">💡</span>
+      <div>
+        <strong>Pro tip</strong>
+        <p>Describe your features clearly to get a more useful README.</p>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>Built with care and Gemini AI.</p>
+      <span>ReadmeAI · Mini Project 3</span>
+    </footer>
+  </main>
+    <script src="script.js" defer></script>
+
+</body>
+</html>

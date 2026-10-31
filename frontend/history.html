@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>README History | ReadmeAI</title>
+  <link rel="stylesheet" href="style.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.6/dist/purify.min.js"></script>
+  <script src="history.js" defer></script>
+</head>
+<body>
+  <header class="navbar">
+    <a href="index.html" class="brand">
+      <span class="brand-icon">R</span>
+      <span>Readme<span class="brand-highlight">AI</span></span>
+    </a>
+    <a href="index.html" class="history-link"> ✦ Generator</a>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="eyebrow">YOUR DOCUMENTATION LIBRARY</div>
+      <h1>README <span>History</span></h1>
+      <p class="hero-description">
+        Reopen, download, or delete your previously generated README files.
+      </p>
+    </section>
+
+    <section class="panel">
+      <div class="panel-heading">
+        <div>
+          <h2>Saved projects</h2>
+          <p id="historyStatus" aria-live="polite">Loading history...</p>
+        </div>
+        <button class="secondary-btn" id="refreshBtn" type="button">
+          Refresh
+        </button>
+      </div>
+
+      <div id="historyList" class="history-list"></div>
+    </section>
+
+    <section class="panel history-preview" id="historyPreview" hidden>
+      <div class="panel-heading">
+        <div>
+          <span class="step-label">README PREVIEW</span>
+          <h2 id="previewTitle">Your README</h2>
+        </div>
+        <button class="secondary-btn" id="closePreview" type="button">
+          Close
+        </button>
+      </div>
+
+      <div class="toolbar-actions">
+        <button class="secondary-btn" id="previewDownload" type="button">
+          ↓ Download README.md
+        </button>
+      </div>
+
+      <div id="previewContent" class="markdown-preview"></div>
+    </section>
+  </main>
+</body>
+</html>
