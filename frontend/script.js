@@ -22,62 +22,6 @@ const wordCount = document.getElementById("wordCount");
 const copyBtn = document.getElementById("copyBtn");
 const downloadBtn = document.getElementById("downloadBtn");
 
-/* ---------- Theme Toggle ---------- */
-
-const themeToggle = document.getElementById("themeToggle");
-const themeIcon = document.getElementById("themeIcon");
-
-function applyTheme(theme) {
-    const isLight = theme === "light";
-
-    document.body.classList.toggle("light-mode", isLight);
-
-    if (themeIcon) {
-        themeIcon.textContent = isLight ? "☾" : "☀";
-    }
-
-    if (themeToggle) {
-        themeToggle.setAttribute(
-            "aria-label",
-            isLight ? "Switch to dark mode" : "Switch to light mode"
-        );
-
-        themeToggle.setAttribute("aria-pressed", String(isLight));
-    }
-}
-
-// Load previously selected theme
-let savedTheme = "dark";
-
-try {
-    savedTheme = localStorage.getItem("readmeai-theme") || "dark";
-} catch (error) {
-    console.warn("Unable to read saved theme:", error);
-}
-
-if (savedTheme !== "light" && savedTheme !== "dark") {
-    savedTheme = "dark";
-}
-
-applyTheme(savedTheme);
-
-// Change theme when the icon is clicked
-if (themeToggle) {
-    themeToggle.addEventListener("click", () => {
-        const newTheme = document.body.classList.contains("light-mode")
-            ? "dark"
-            : "light";
-
-        applyTheme(newTheme);
-
-        try {
-            localStorage.setItem("readmeai-theme", newTheme);
-        } catch (error) {
-            console.warn("Unable to save theme:", error);
-        }
-    });
-}
-
 /* ---------- Store Generated Markdown ---------- */
 
 let generatedMarkdown = "";
@@ -115,7 +59,7 @@ if (readmeForm) {
         try {
             /* STEP 1: Generate README using backend */
 
-            const response = await fetch("/api/readme/generate", {
+            const result = await ReadmeAPI.request("/api/readme/generate", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -123,9 +67,7 @@ if (readmeForm) {
                 body: JSON.stringify(projectDetails)
             });
 
-            const result = await response.json();
-
-            if (!response.ok || !result.success || !result.markdown) {
+            if (!result.success || !result.markdown) {
                 throw new Error(
                     result.message || "Unable to generate README."
                 );
@@ -150,7 +92,7 @@ if (readmeForm) {
                 previewStatus.textContent =
                     "README generated. Saving to history...";
 
-                const saveResponse = await fetch("/api/readme/history", {
+                const saveResult = await ReadmeAPI.request("/api/readme/history", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
@@ -161,9 +103,7 @@ if (readmeForm) {
                     })
                 });
 
-                const saveResult = await saveResponse.json();
-
-                if (!saveResponse.ok || !saveResult.success) {
+                if (!saveResult.success) {
                     throw new Error(
                         saveResult.message || "Unable to save README history."
                     );

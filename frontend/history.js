@@ -20,22 +20,6 @@ let currentReadme = null;
 
 /* ---------- API response helper ---------- */
 
-async function readJsonResponse(response) {
-    const contentType = response.headers.get("content-type") || "";
-
-    if (!contentType.includes("application/json")) {
-        const responseText = await response.text();
-
-        console.error("Expected JSON but received:", responseText);
-
-        throw new Error(
-            "Backend did not return JSON. Check the API URL and backend server."
-        );
-    }
-
-    return response.json();
-}
-
 /* ---------- Load Saved README History ---------- */
 
 async function loadHistory() {
@@ -46,10 +30,9 @@ async function loadHistory() {
     historyList.replaceChildren();
 
     try {
-        const response = await fetch(API_URL);
-        const result = await readJsonResponse(response);
+        const result = await ReadmeAPI.request(API_URL);
 
-        if (!response.ok || !result.success) {
+        if (!result.success) {
             throw new Error(
                 result.message || "Unable to load README history."
             );
@@ -137,13 +120,11 @@ function createButton(text, className) {
 /* ---------- Get One README ---------- */
 
 async function getReadme(id) {
-    const response = await fetch(
+    const result = await ReadmeAPI.request(
         `${API_URL}/${encodeURIComponent(id)}`
     );
 
-    const result = await readJsonResponse(response);
-
-    if (!response.ok || !result.success) {
+    if (!result.success) {
         throw new Error(
             result.message || "Unable to retrieve README."
         );
@@ -224,14 +205,12 @@ async function deleteReadme(id) {
     if (!confirmed) return;
 
     try {
-        const response = await fetch(
+        const result = await ReadmeAPI.request(
             `${API_URL}/${encodeURIComponent(id)}`,
             { method: "DELETE" }
         );
 
-        const result = await readJsonResponse(response);
-
-        if (!response.ok || !result.success) {
+        if (!result.success) {
             throw new Error(
                 result.message || "Unable to delete README."
             );

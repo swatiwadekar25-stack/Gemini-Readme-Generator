@@ -46,12 +46,11 @@ router.post("/", async (req, res) => {
       readme: savedReadme
     });
   } catch (error) {
-    console.log("README save error:",error)
+    console.error("README save error:", error);
 
     res.status(500).json({
       success: false,
-      message: "Failed to save README.",
-      error:error.message
+      message: "Failed to save README."
     });
   }
 });

@@ -1044,3 +1044,55 @@ button:disabled {
         width: 100%;
     }
 }
+
+/* Light-mode overrides for components with legacy dark-only colors. */
+body.light-mode .preview-toolbar #copyBtn,
+body.light-mode .preview-toolbar #downloadBtn {
+    border-color: #2563eb;
+    background: #2563eb;
+    color: #fff;
+}
+
+body.light-mode .preview-toolbar #copyBtn:hover:not(:disabled),
+body.light-mode .preview-toolbar #downloadBtn:hover:not(:disabled) {
+    border-color: #1d4ed8;
+    background: #1d4ed8;
+    color: #fff;
+}
+
+body.light-mode .history-link {
+    border-color: var(--border);
+    background: var(--surface-hover);
+    color: var(--text);
+}
+
+body.light-mode .history-link:hover {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+    color: var(--accent-hover);
+}
+
+body.light-mode .secondary-btn {
+    border-color: var(--border);
+    background: var(--surface-hover);
+    color: var(--text);
+}
+
+body.light-mode .secondary-btn:hover:not(:disabled) {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+    color: var(--accent-hover);
+}
+
+body.light-mode .history-item {
+    border-color: var(--border);
+    background: var(--input-bg);
+}
+
+body.light-mode .history-item h3 {
+    color: var(--text);
+}
+
+body.light-mode .history-item p {
+    color: var(--text-secondary);
+}
